@@ -46,6 +46,18 @@
   color: #547aa5;
 }
 
+main {
+  padding-top: 120px;
+}
+
+body {
+  background-color: #dad2d8;
+  margin: 0;
+  justify-content: center;
+  display: flex;
+  padding: 50px;
+}
+
 footer {
   position: fixed;
   text-align: center;
@@ -54,4 +66,17 @@ footer {
   width: 100%;
   background-color: #474044;
   color: white;
+  padding: 10px;
+}
+
+/* Mobile CSS */
+@media (max-width: 600px) {
+  .navigation-title {
+    letter-spacing: 0.5rem;
+    font-size: 1rem;
+  }
+  .navbar-list {
+    flex-direction: row;
+    height: auto;
+  }
 }
