@@ -102,14 +102,48 @@ function axialDisk(radius) {
 }
 
 function axialCatan56() {
-  const out = [];
-  const R = 3;
-  for (let r = -R; r <= R; r++) {
-    let qmin = Math.max(-R, -r - R);
-    let qmax = Math.min(R, -r + R) - 1; // Trim right consistently
-    for (let q = qmin; q <= qmax; q++) out.push({ q, r });
-  }
-  return out;
+  // 5-6 player board: elongated hexagon
+  // Pattern: 4-5-6-6-5-4 hexes per row = 30 total
+  const hexes = [
+    // Row r=-2 (top, 4 hexes)
+    { q: 2, r: -2 },
+    { q: 3, r: -2 },
+    { q: 4, r: -2 },
+    { q: 5, r: -2 },
+    // Row r=-1 (5 hexes)
+    { q: 1, r: -1 },
+    { q: 2, r: -1 },
+    { q: 3, r: -1 },
+    { q: 4, r: -1 },
+    { q: 5, r: -1 },
+    // Row r=0 (6 hexes)
+    { q: 0, r: 0 },
+    { q: 1, r: 0 },
+    { q: 2, r: 0 },
+    { q: 3, r: 0 },
+    { q: 4, r: 0 },
+    { q: 5, r: 0 },
+    // Row r=1 (6 hexes) - shifted left
+    { q: -1, r: 1 },
+    { q: 0, r: 1 },
+    { q: 1, r: 1 },
+    { q: 2, r: 1 },
+    { q: 3, r: 1 },
+    { q: 4, r: 1 },
+    // Row r=2 (5 hexes) - shifted left
+    { q: -1, r: 2 },
+    { q: 0, r: 2 },
+    { q: 1, r: 2 },
+    { q: 2, r: 2 },
+    { q: 3, r: 2 },
+    // Row r=3 (bottom, 4 hexes) - shifted left
+    { q: -1, r: 3 },
+    { q: 0, r: 3 },
+    { q: 1, r: 3 },
+    { q: 2, r: 3 },
+  ];
+
+  return hexes;
 }
 
 const axialToPixel = (q, r, S) => ({
