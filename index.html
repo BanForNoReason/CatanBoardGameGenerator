@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/index.css" />
-
     <title>Catan Board Generator</title>
   </head>
   <body>
@@ -25,31 +24,42 @@
         <div class="toolbar">
           <label for="boardType">Board:</label>
           <select id="boardType" aria-label="Board type">
-            <option value="standard">Standard (3-4 Playes)</option>
-            <option value="standard">Expanded (5-6 Players)</option>
+            <option value="standard">Standard (3-4 Players)</option>
+            <option value="expanded">Expanded (5-6 Players)</option>
           </select>
+
           <div class="checks">
-            <label
-              ><input type="checkbox" id="block68" /> Block adjacent 6 &
-              8</label
-            >
-            <label
-              ><input type="checkbox" id="blockSame" /> Block identical numbers
-              touching</label
-            >
+            <label>
+              <input type="checkbox" id="block68" />
+              Block adjacent 6 & 8
+            </label>
+            <label>
+              <input type="checkbox" id="blockSame" />
+              Block identical numbers
+            </label>
+            <label>
+              <input type="checkbox" id="blockResource" />
+              Block same resources
+            </label>
           </div>
 
           <button id="regen">Generate</button>
         </div>
-        <canvas id="board"></canvas>
+
+        <div class="canvas-container">
+          <canvas id="board"></canvas>
+        </div>
       </div>
     </main>
 
     <footer>
       &copy; <span id="year"></span> ChegTech. All rights reserved.
     </footer>
+
+    <script>
+      // Set current year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="app.js"></script>
   </body>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </html>
