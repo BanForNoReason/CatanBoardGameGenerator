@@ -283,7 +283,7 @@ function isValid(tiles, neighborsIdx, opts) {
 
 function generateTiles(neighborsIdx, mode, options) {
   const config = BOARD_CONFIG[mode];
-  const maxTries = 50000; // Increased for stricter constraints
+  const maxTries = 1000000; // Increased for stricter constraints
 
   for (let tries = 0; tries < maxTries; tries++) {
     const tiles = makeAssignment(config.resources, config.chits);
