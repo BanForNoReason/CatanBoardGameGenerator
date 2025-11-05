@@ -1,6 +1,6 @@
 "use strict";
 
-/* ===== Config ===== */
+/*  Config  */
 const TILE_RADIUS = 52;
 const NUMBER_FONT_FAMILY =
   "system-ui, -apple-system, Segoe UI, Roboto, sans-serif";
@@ -56,7 +56,7 @@ const BOARD_CONFIG = {
   },
 };
 
-/* ===== DOM ===== */
+/*  DOM  */
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
 const elements = {
@@ -67,7 +67,7 @@ const elements = {
   chkResource: document.getElementById("blockResource"),
 };
 
-/* ===== Math / Utils ===== */
+/*  Math / Utils  */
 const SQ3 = Math.sqrt(3);
 const DIRS = [
   [1, 0],
@@ -117,7 +117,7 @@ const axialToPixel = (q, r, S) => ({
   y: S * 1.5 * r,
 });
 
-/* ===== Canvas Utilities ===== */
+/*  Canvas Utilities  */
 function resizeCanvasToDisplaySize(canvas, cssW, cssH) {
   const dpr = window.devicePixelRatio || 1;
   canvas.style.width = `${cssW}px`;
@@ -203,7 +203,7 @@ function drawToken(ctx, num, cx, cy, S) {
   }
 }
 
-/* ===== Data Generation ===== */
+/*  Data Generation  */
 function buildNeighborsIndex(axials) {
   const idxByKey = new Map(axials.map((t, i) => [key(t.q, t.r), i]));
   return axials.map((t) =>
@@ -271,7 +271,7 @@ function generateTiles(neighborsIdx, mode, options) {
   throw new Error("No valid layout found. Try disabling some constraints.");
 }
 
-/* ===== Layout / Render ===== */
+/*  Layout / Render  */
 function computeLayout(axials, S) {
   const pts = axials.map((t) => axialToPixel(t.q, t.r, S));
   const xs = pts.map((p) => p.x);
@@ -352,7 +352,7 @@ function renderBoard(state) {
   ctx.restore();
 }
 
-/* ===== Controller ===== */
+/*  Controller  */
 const state = {
   mode: "standard",
   axials: null,
@@ -389,7 +389,7 @@ function setBoardMode(mode) {
   state.centers = state.base.centers;
 }
 
-/* ===== Image Loader ===== */
+/* Image Loader */
 async function loadImages(map) {
   const entries = Object.entries(map);
   const promises = entries.map(
@@ -405,7 +405,7 @@ async function loadImages(map) {
   return Object.fromEntries(results);
 }
 
-/* ===== Initialization ===== */
+/*  Initialization  */
 (async function init() {
   state.images = await loadImages(IMG_SRC);
   setBoardMode("standard");
