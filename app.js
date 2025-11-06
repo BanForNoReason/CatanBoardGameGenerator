@@ -65,6 +65,8 @@ const elements = {
   chk68: document.getElementById("block68"),
   chkSame: document.getElementById("blockSame"),
   chkResource: document.getElementById("blockResource"),
+  chkDesert: document.getElementById("blockDesert"),
+  blockDesertLabel: document.getElementById("blockDesertLabel"),
 };
 
 /*  Math / Utils  */
@@ -277,6 +279,11 @@ function isValid(tiles, neighborsIdx, opts) {
     if (opts.blockResource && tile.resource !== "desert") {
       if (neighbors.some((n) => n.resource === tile.resource)) return false;
     }
+
+    // Check desert tiles touching (only for expanded mode with multiple deserts)
+    if (opts.blockDesert && tile.resource === "desert") {
+      if (neighbors.some((n) => n.resource === "desert")) return false;
+    }
   }
   return true;
 }
@@ -402,7 +409,18 @@ function getOptions() {
     block68: elements.chk68?.checked || false,
     blockSame: elements.chkSame?.checked || false,
     blockResource: elements.chkResource?.checked || false,
+    blockDesert: elements.chkDesert?.checked || false,
   };
+}
+
+function toggleDesertOption() {
+  const mode = elements.selectBoard?.value || "standard";
+  if (mode === "expanded") {
+    elements.blockDesertLabel.style.display = "";
+  } else {
+    elements.blockDesertLabel.style.display = "none";
+    elements.chkDesert.checked = false;
+  }
 }
 
 async function regenerate() {
@@ -421,6 +439,7 @@ function setBoardMode(mode) {
   state.neighborsIdx = buildNeighborsIndex(state.axials);
   state.base = computeLayout(state.axials, TILE_RADIUS);
   state.centers = state.base.centers;
+  toggleDesertOption();
 }
 
 /* Image Loader */
@@ -446,6 +465,10 @@ async function loadImages(map) {
   await regenerate();
 
   elements.btnRegen.addEventListener("click", regenerate);
+  elements.selectBoard.addEventListener("change", () => {
+    toggleDesertOption();
+    regenerate();
+  });
   window.addEventListener("resize", () => renderBoard(state));
 
   document.querySelectorAll(".navbar a[href='#']").forEach((a) => {
