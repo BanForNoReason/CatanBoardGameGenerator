@@ -102,11 +102,11 @@ body {
 
 /* Main Content */
 main {
-  padding-top: 10px;
+  padding-top: 1.5rem;
   flex: 1;
   display: flex;
   justify-content: center;
-  padding-bottom: 80px;
+  padding-bottom: 1.5rem;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -116,7 +116,7 @@ main {
   max-width: 1400px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 /* Toolbar */
@@ -231,14 +231,26 @@ main {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  max-height: 65vh;
+}
+
+.canvas-container figure {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 canvas {
   display: block;
   border-radius: 12px;
   max-width: 100%;
+  max-height: 60vh;
   height: auto;
-  width: 100%;
+  width: auto;
+  object-fit: contain;
 }
 
 /* Content Sections */
@@ -298,7 +310,7 @@ canvas {
 /* Scroll to Top Button */
 #scrollToTop {
   position: fixed;
-  bottom: 80px;
+  bottom: 30px;
   right: 30px;
   background: linear-gradient(
     135deg,
@@ -336,14 +348,13 @@ canvas {
 /* Footer */
 footer {
   text-align: center;
-  left: 0;
-  bottom: 0;
   width: 100%;
   background: var(--nav-color);
   color: white;
   padding: 1rem;
   font-size: 0.9rem;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
 }
 
 /* Mobile Responsive */
@@ -365,8 +376,8 @@ footer {
   }
 
   main {
-    padding-top: 110px;
-    padding-bottom: 70px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -399,6 +410,11 @@ footer {
 
   .canvas-container {
     padding: 0.8rem;
+    max-height: 60vh;
+  }
+
+  canvas {
+    max-height: 55vh;
   }
 
   .content {
@@ -438,8 +454,8 @@ footer {
   }
 
   main {
-    padding-top: 50px;
-    padding-bottom: 60px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -455,6 +471,11 @@ footer {
 
   .canvas-container {
     padding: 0.5rem;
+    max-height: 50vh;
+  }
+
+  canvas {
+    max-height: 45vh;
   }
 
   .content {
@@ -482,7 +503,7 @@ footer {
   }
 
   #scrollToTop {
-    bottom: 70px;
+    bottom: 20px;
     right: 20px;
     width: 45px;
     height: 45px;
