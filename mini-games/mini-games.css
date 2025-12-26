@@ -1,0 +1,129 @@
+body {
+  background: var(--backdrop, #0f1115);
+  min-height: 100vh;
+}
+main {
+  padding: 24px 16px;
+  display: block;
+}
+.wrap {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* Keep this page visually consistent with the Imposter game's card style */
+.card {
+  background: radial-gradient(
+      1100px 620px at 22% -10%,
+      rgba(107, 76, 154, 0.16),
+      transparent
+    ),
+    radial-gradient(900px 520px at 112% 12%, rgba(0, 0, 0, 0.1), transparent),
+    rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.game {
+  position: relative;
+  display: block;
+  padding: 16px;
+  border-radius: 22px;
+  color: #16181d;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: radial-gradient(
+      1200px 600px at 30% -10%,
+      rgba(107, 76, 154, 0.18),
+      transparent
+    ),
+    radial-gradient(900px 400px at 120% 10%, rgba(0, 0, 0, 0.08), transparent),
+    #ffffff;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+
+  /* performance */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: layout paint;
+  isolation: isolate;
+
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    border-color 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+/* Shadow lift (opacity composited instead of animating box-shadow) */
+.game::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.22);
+  will-change: opacity;
+  transition: opacity 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+/* Glow highlight */
+.game::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    900px 420px at 18% 0%,
+    rgba(161, 76, 255, 0.14),
+    transparent
+  );
+  will-change: opacity;
+  transition: opacity 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .game:hover {
+    transform: translate3d(0, -4px, 0);
+    border-color: rgba(107, 76, 154, 0.28);
+  }
+  .game:hover::before {
+    opacity: 1;
+  }
+  .game:hover::after {
+    opacity: 1;
+  }
+}
+
+.game:active {
+  transform: translate3d(0, -2px, 0) scale(0.992);
+}
+
+.game:focus-visible {
+  outline: 3px solid rgba(161, 76, 255, 0.45);
+  outline-offset: 3px;
+}
+
+.game h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+}
+.muted {
+  color: #4c5562;
+  line-height: 1.45;
+}

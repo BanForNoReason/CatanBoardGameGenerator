@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="../imposter/style.css" />
+
+    <title>Imposter Game | Social Deduction Word Cards (Save Players)</title>
+
+    <meta
+      name="description"
+      content="Play an Imposter social deduction game with swipeable word cards. Save players, reveal roles, and run quick rounds on mobile or desktop."
+    />
+
+    <meta
+      name="keywords"
+      content="imposter game, social deduction game, word game, role cards, party game, among us style game"
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/images/icons/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/icons/favicon-16x16.png"
+    />
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/images/icons/site.webmanifest" />
+    <meta name="theme-color" content="#2d1b2e" />
+
+    <!-- Canonical + Open Graph -->
+    <link
+      rel="canonical"
+      href="https://boardgenerator.com/mini-games/imposter/"
+    />
+    <meta
+      property="og:url"
+      content="https://boardgenerator.com/mini-games/imposter/"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Imposter Game | Social Deduction Word Cards (Save Players)"
+    />
+    <meta
+      property="og:description"
+      content="Swipe through word cards to reveal roles in the Imposter game. Save player names and run fast social deduction rounds."
+    />
+    <meta
+      property="og:image"
+      content="https://boardgenerator.com/images/icons/android-chrome-512x512.png"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Imposter Game",
+        "url": "https://boardgenerator.com/mini-games/imposter/",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "description": "Online Imposter social deduction game using swipeable word cards, with saved player setup for quick rounds.",
+        "creator": {
+          "@type": "Organization",
+          "name": "ChegTech"
+        }
+      }
+    </script>
+  </head>
+
+  <body class="mg-body">
+    <header>
+      <section class="navigation mg-nav">
+        <h1 class="navigation-title mg-title">MINI GAMES</h1>
+        <nav aria-label="Mini games navigation">
+          <ul class="navbar-list">
+            <li><a href="../index.html">All Games</a></li>
+            <li><a aria-current="page" href="./index.html">Imposter</a></li>
+            <li><a href="../mafia/index.html">Mafia</a></li>
+          </ul>
+        </nav>
+      </section>
+    </header>
+
+    <main class="mg-main">
+      <div class="mg-wrap" id="app">
+        <!-- SETUP -->
+        <section class="mg-card" id="setupView">
+          <div class="mg-card-header">
+            <h2>🕵️ The Imposter Word Game</h2>
+            <p class="mg-subtitle">
+              Add players, pick categories, then deal secret role cards. Swipe
+              to pass the device. Hold to reveal.
+            </p>
+          </div>
+
+          <div class="mg-grid">
+            <div class="mg-panel">
+              <h3>Players</h3>
+
+              <div class="mg-row mg-row-wrap">
+                <input
+                  id="playerName"
+                  class="mg-input"
+                  type="text"
+                  placeholder="Player name"
+                  autocomplete="off"
+                />
+                <button id="addPlayer" class="mg-btn" type="button">Add</button>
+                <button
+                  id="clearPlayers"
+                  class="mg-btn mg-btn-danger"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+
+              <ul id="playerList" class="mg-list"></ul>
+              <p class="mg-hint" id="playersHint"></p>
+            </div>
+
+            <div class="mg-panel">
+              <h3>Settings</h3>
+
+              <label class="mg-label">
+                Imposters (max 3)
+                <div class="mg-row">
+                  <input
+                    id="imposterCount"
+                    type="range"
+                    min="1"
+                    max="3"
+                    value="1"
+                  />
+                  <span id="imposterCountValue" class="mg-pill">1</span>
+                </div>
+              </label>
+              <section class="mg-pool" aria-label="Word pool">
+                <div class="mg-row mg-row-wrap mg-pool-head">
+                  <h3 class="mg-h3">Word pool</h3>
+                  <label class="mg-checkbox mg-checkbox-inline">
+                    <input id="showWords" type="checkbox" />
+                    Show words (host only)
+                  </label>
+                </div>
+
+                <p class="mg-hint" id="poolHint">
+                  Categories are visible. Words stay hidden by default. Use
+                  “Show words” only if you’re managing the pool.
+                </p>
+
+                <div class="mg-row mg-row-wrap">
+                  <button
+                    id="newWord"
+                    class="mg-btn mg-btn-primary"
+                    type="button"
+                  >
+                    Pick new word
+                  </button>
+                  <button
+                    id="selectAllWords"
+                    class="mg-btn mg-btn-success"
+                    type="button"
+                  >
+                    Enable all
+                  </button>
+                  <button
+                    id="clearWords"
+                    class="mg-btn mg-btn-danger"
+                    type="button"
+                  >
+                    Disable all
+                  </button>
+                </div>
+
+                <div class="mg-pool-summary" id="poolSummary"></div>
+
+                <div
+                  id="wordSections"
+                  class="mg-word-sections"
+                  aria-label="Word pool by category"
+                ></div>
+              </section>
+            </div>
+          </div>
+
+          <div class="mg-panel mg-panel-wide">
+            <h3>Categories</h3>
+            <p class="mg-hint">
+              Pick one or more. If none are selected, all categories are used.
+            </p>
+            <div
+              id="categoryGrid"
+              class="mg-cat-grid"
+              aria-label="Categories"
+            ></div>
+          </div>
+
+          <div class="mg-row mg-row-wrap mg-actions">
+            <button id="startGame" class="mg-btn mg-btn-primary" type="button">
+              Deal roles
+            </button>
+            <p class="mg-hint" id="setupHint"></p>
+          </div>
+        </section>
+
+        <!-- DECK -->
+        <section class="mg-card mg-hidden" id="deckView">
+          <div class="mg-deck-header">
+            <div>
+              <h2 id="deckTitle">Role Card</h2>
+              <p class="mg-subtitle">
+                Hand the phone to the next player. Hold the card to reveal.
+                Swipe to continue.
+              </p>
+            </div>
+            <div class="mg-row mg-row-wrap">
+              <span id="cardIndexChip" class="mg-pill"></span>
+            </div>
+          </div>
+
+          <div class="mg-deck">
+            <div class="mg-stack" id="stack">
+              <article
+                class="mg-swipe-card"
+                id="card"
+                tabindex="0"
+                aria-label="Player card"
+              >
+                <div class="mg-card-face mg-face-front">
+                  <div class="mg-face-top">
+                    <span class="mg-chip mg-chip-soft">Hold to reveal</span>
+                  </div>
+
+                  <h3 class="mg-player" id="cardPlayer">Player</h3>
+                  <p class="mg-instructions">
+                    Swipe to pass the device to the next player.
+                  </p>
+
+                  <div class="mg-swipe-hint">
+                    <span>←</span><span>Swipe</span><span>→</span>
+                  </div>
+                </div>
+
+                <div class="mg-card-face mg-face-back" aria-hidden="true">
+                  <div class="mg-face-top">
+                    <span class="mg-chip" id="roleChip">Role</span>
+                    <span class="mg-chip mg-chip-soft">Release to hide</span>
+                  </div>
+
+                  <h3 class="mg-secret" id="roleTitle">ROLE</h3>
+                  <div class="mg-word-big" id="secretWord">WORD</div>
+                  <p class="mg-role-desc" id="roleDesc"></p>
+
+                  <div class="mg-tip" id="roleTip"></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="mg-row mg-row-wrap mg-actions">
+            <button id="next" class="mg-btn mg-btn-primary" type="button">
+              Next
+            </button>
+          </div>
+        </section>
+
+        <!-- END -->
+        <section class="mg-card mg-hidden" id="endView">
+          <div class="mg-card-header">
+            <h2>Roles dealt ✅</h2>
+            <p class="mg-subtitle">
+              Everyone should now know their role. Start playing.
+            </p>
+          </div>
+
+          <div class="mg-grid">
+            <div class="mg-panel">
+              <h3>Next round</h3>
+              <p class="mg-hint">
+                Deal again to get a new random word and new random imposters
+                (same players & categories).
+              </p>
+              <button
+                id="nextRound"
+                class="mg-btn mg-btn-primary"
+                type="button"
+              >
+                Deal next round
+              </button>
+            </div>
+
+            <div class="mg-panel">
+              <h3>Reset</h3>
+              <button id="restart" class="mg-btn mg-btn-danger" type="button">
+                Start a new game
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

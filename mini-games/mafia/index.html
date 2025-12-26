@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="../mafia/style.css" />
+
+    <title>Mafia Game Online | Swipe Role Cards & Save Players</title>
+
+    <meta
+      name="description"
+      content="Play Mafia online with swipeable role cards. Add and save players, deal roles fast, and run clean rounds on mobile or desktop."
+    />
+
+    <meta
+      name="keywords"
+      content="mafia game online, mafia role cards, social deduction game, party game, role dealing, mafia roles"
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/images/icons/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/icons/favicon-16x16.png"
+    />
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/images/icons/site.webmanifest" />
+    <meta name="theme-color" content="#2d1b2e" />
+
+    <!-- Canonical + Open Graph -->
+    <link rel="canonical" href="https://boardgenerator.com/mini-games/mafia/" />
+    <meta
+      property="og:url"
+      content="https://boardgenerator.com/mini-games/mafia/"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Mafia Game Online | Swipe Role Cards & Save Players"
+    />
+    <meta
+      property="og:description"
+      content="Swipe to reveal roles in Mafia. Save player names, deal roles quickly, and run smooth rounds on phone or desktop."
+    />
+    <meta
+      property="og:image"
+      content="https://boardgenerator.com/images/icons/android-chrome-512x512.png"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mafia Game",
+        "url": "https://boardgenerator.com/mini-games/mafia/",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "description": "Online Mafia game with swipeable role cards and saved player setup for fast, mobile-friendly social deduction rounds.",
+        "creator": {
+          "@type": "Organization",
+          "name": "ChegTech"
+        }
+      }
+    </script>
+  </head>
+
+  <body class="mg-body mg-body-dark">
+    <header>
+      <section class="navigation mg-nav">
+        <h1 class="navigation-title mg-title">MINI GAMES</h1>
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../imposter/index.html">Imposter</a></li>
+            <li><a aria-current="page" href="./index.html">Mafia</a></li>
+          </ul>
+        </nav>
+      </section>
+    </header>
+
+    <main class="mg-main">
+      <div class="mg-wrap" id="app">
+        <!-- SETUP -->
+        <section class="mg-card mg-card-dark" id="setupView">
+          <div class="mg-card-header">
+            <h2>🎭 Mafia</h2>
+            <p class="mg-subtitle mg-subtitle-dark">
+              Add players, choose roles, and deal role cards. Swipe to pass the
+              device. Hold on a card to reveal (and release to hide).
+            </p>
+          </div>
+
+          <div class="mg-grid">
+            <div class="mg-panel mg-panel-dark">
+              <h3>Players</h3>
+
+              <div class="mg-row">
+                <input
+                  id="playerName"
+                  class="mg-input mg-input-dark"
+                  type="text"
+                  placeholder="Add a player name..."
+                  autocomplete="off"
+                />
+                <button
+                  id="addPlayer"
+                  class="mg-btn mg-btn-primary mg-btn-primary-dark"
+                  type="button"
+                >
+                  Add
+                </button>
+              </div>
+
+              <ul
+                id="playerList"
+                class="mg-list mg-list-dark"
+                aria-live="polite"
+              ></ul>
+
+              <div class="mg-row mg-row-wrap">
+                <button
+                  id="shufflePlayers"
+                  class="mg-btn mg-btn-dark"
+                  type="button"
+                >
+                  Shuffle
+                </button>
+                <button
+                  id="clearPlayers"
+                  class="mg-btn mg-btn-danger"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <div class="mg-panel mg-panel-dark">
+              <h3>Setup</h3>
+
+              <label class="mg-label mg-label-dark">
+                Moderator
+                <select
+                  id="moderatorSelect"
+                  class="mg-select mg-select-dark"
+                ></select>
+              </label>
+
+              <label class="mg-label mg-label-dark">
+                Mafia count
+                <div class="mg-row">
+                  <input
+                    id="mafiaCount"
+                    type="range"
+                    min="1"
+                    max="3"
+                    value="2"
+                  />
+                  <span id="mafiaCountValue" class="mg-pill mg-pill-dark"
+                    >2</span
+                  >
+                </div>
+              </label>
+
+              <details class="mg-details mg-details-dark" open>
+                <summary>Role toggles</summary>
+                <div class="mg-details-body">
+                  <div class="mg-role-grid">
+                    <div class="mg-role-col">
+                      <h4>Town (Power)</h4>
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleDoctor" checked />
+                        Doctor</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleDetective" checked />
+                        Detective</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleBodyguard" />
+                        Bodyguard</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleVigilante" /> Vigilante
+                        (1-shot)</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleTracker" />
+                        Tracker</label
+                      >
+                    </div>
+
+                    <div class="mg-role-col">
+                      <h4>Mafia (Special)</h4>
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleFramer" /> Framer</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleConsigliere" />
+                        Consigliere</label
+                      >
+                    </div>
+
+                    <div class="mg-role-col">
+                      <h4>Third-Party</h4>
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleJester" /> Jester</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleSerialKiller" /> Serial
+                        Killer</label
+                      >
+                      <label class="mg-checkbox mg-checkbox-dark"
+                        ><input type="checkbox" id="roleExecutioner" />
+                        Executioner</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <label class="mg-label mg-label-dark">
+                Moderator PIN (optional)
+                <div class="mg-row">
+                  <input
+                    id="pinInput"
+                    class="mg-input mg-input-dark"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="8"
+                    placeholder="Leave blank to auto-generate"
+                  />
+                  <button id="genPin" class="mg-btn mg-btn-dark" type="button">
+                    Generate
+                  </button>
+                </div>
+              </label>
+
+              <div class="mg-row mg-row-wrap" style="margin-top: 10px">
+                <button
+                  id="startGame"
+                  class="mg-btn mg-btn-primary mg-btn-primary-dark"
+                  type="button"
+                >
+                  Start & Deal Cards
+                </button>
+              </div>
+
+              <p
+                class="mg-hint mg-hint-dark"
+                id="setupHint"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <details class="mg-details mg-details-dark">
+            <summary>How to play (quick)</summary>
+            <div class="mg-details-body">
+              <p class="mg-hint mg-hint-dark">
+                Night: Mafia picks a victim. Doctor saves. Detective checks.
+                Day: announce result, discuss, vote to eliminate. Town wins by
+                eliminating all Mafia. Mafia wins when they reach a 1:1 ratio
+                with Town.
+              </p>
+            </div>
+          </details>
+        </section>
+
+        <!-- DECK -->
+        <section class="mg-card mg-card-dark mg-hidden" id="deckView">
+          <div class="mg-deck-header">
+            <div>
+              <h2 id="deckTitle">Dealing Roles</h2>
+              <p class="mg-subtitle mg-subtitle-dark" id="deckSubtitle">
+                Swipe left/right to move. Hold to reveal. Release to hide.
+              </p>
+            </div>
+            <div class="mg-row mg-row-wrap">
+              <button id="restart" class="mg-btn mg-btn-danger" type="button">
+                New Game
+              </button>
+            </div>
+          </div>
+
+          <div class="mg-deck">
+            <div class="mg-stack" id="stack">
+              <article
+                class="mg-swipe-card mg-swipe-card-dark"
+                id="card"
+                tabindex="0"
+                aria-label="Player card"
+              >
+                <div class="mg-card-face mg-face-front">
+                  <div class="mg-face-top">
+                    <span class="mg-chip mg-chip-dark" id="cardIndexChip"
+                      >1 / 1</span
+                    >
+                    <span class="mg-chip mg-chip-soft mg-chip-soft-dark"
+                      >Hold to reveal</span
+                    >
+                  </div>
+
+                  <h3 class="mg-player mg-player-dark" id="cardPlayer">
+                    Player
+                  </h3>
+                  <p class="mg-instructions mg-instructions-dark">
+                    Swipe to pass the device to the next player.
+                  </p>
+
+                  <div class="mg-swipe-hint mg-swipe-hint-dark">
+                    <span>←</span><span>Swipe</span><span>→</span>
+                  </div>
+                </div>
+
+                <div class="mg-card-face mg-face-back" aria-hidden="true">
+                  <div class="mg-face-top">
+                    <span class="mg-chip mg-chip-dark" id="roleChip">Role</span>
+                    <span class="mg-chip mg-chip-soft mg-chip-soft-dark"
+                      >Release to hide</span
+                    >
+                  </div>
+
+                  <h3 class="mg-secret mg-secret-dark" id="roleTitle">ROLE</h3>
+                  <p class="mg-role-desc mg-role-desc-dark" id="roleDesc">
+                    Role info
+                  </p>
+
+                  <div class="mg-tip mg-tip-dark" id="roleTip"></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="mg-row mg-deck-controls">
+            <button
+              id="next"
+              class="mg-btn mg-btn-primary mg-btn-primary-dark"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </section>
+
+        <!-- END -->
+        <section class="mg-card mg-card-dark mg-hidden" id="endView">
+          <h2>Roles dealt ✅</h2>
+          <p class="mg-subtitle mg-subtitle-dark">
+            Everyone should now know their role. Hand the device to the
+            moderator.
+          </p>
+
+          <div class="mg-end-grid">
+            <div class="mg-panel mg-panel-dark">
+              <h3>Moderator</h3>
+              <p class="mg-hint mg-hint-dark">
+                Open the moderator panel to see every role and run Night/Day
+                phases.
+              </p>
+              <button
+                id="openModerator"
+                class="mg-btn mg-btn-primary mg-btn-primary-dark"
+                type="button"
+              >
+                Open Moderator Panel
+              </button>
+              <p class="mg-hint mg-hint-dark" id="pinHint"></p>
+            </div>
+
+            <div class="mg-panel mg-panel-dark">
+              <h3>Reset</h3>
+              <button id="restart2" class="mg-btn mg-btn-danger" type="button">
+                Start a new game
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODERATOR PANEL -->
+        <section class="mg-card mg-card-dark mg-hidden" id="modView">
+          <div class="mg-deck-header">
+            <div>
+              <h2>Moderator Panel</h2>
+              <p class="mg-subtitle mg-subtitle-dark">
+                Enter PIN to unlock (if set).
+              </p>
+            </div>
+            <div class="mg-row mg-row-wrap">
+              <button
+                id="lockModerator"
+                class="mg-btn mg-btn-dark"
+                type="button"
+              >
+                Lock
+              </button>
+              <button
+                id="closeModerator"
+                class="mg-btn mg-btn-dark"
+                type="button"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          <div class="mg-grid" style="margin-top: 12px">
+            <div class="mg-panel mg-panel-dark">
+              <h3>Unlock</h3>
+              <div class="mg-row">
+                <input
+                  id="pinCheck"
+                  class="mg-input mg-input-dark"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="PIN"
+                />
+                <button
+                  id="unlock"
+                  class="mg-btn mg-btn-primary mg-btn-primary-dark"
+                  type="button"
+                >
+                  Unlock
+                </button>
+              </div>
+              <p id="unlockHint" class="mg-hint mg-hint-dark"></p>
+            </div>
+
+            <div class="mg-panel mg-panel-dark">
+              <h3>Phase checklist</h3>
+              <ol class="mg-ol mg-ol-dark">
+                <li>
+                  <strong>Night</strong>: Mafia → Doctor → Detective →
+                  (Tracker/Vigilante/etc.)
+                </li>
+                <li>
+                  <strong>Day</strong>: Announce outcome → Discuss → Vote →
+                  Eliminate
+                </li>
+              </ol>
+              <p class="mg-hint mg-hint-dark">
+                This panel also lets you mark players as Alive/Dead.
+              </p>
+            </div>
+          </div>
+
+          <div class="mg-panel mg-panel-dark" style="margin-top: 12px">
+            <h3>Roles</h3>
+            <div id="rolesTableWrap" class="mg-table-wrap"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+
+@import url("../imposter/style.css");
+
+/* Dark noir theme overrides */
+.mg-body-dark {
+  background: radial-gradient(1200px 600px at 10% -20%, rgba(155, 78, 255, 0.22), transparent),
+    radial-gradient(900px 500px at 110% 10%, rgba(255, 56, 56, 0.16), transparent),
+    #0b0d12;
+}
+
+.mg-card-dark {
+  background: rgba(16, 18, 26, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+}
+
+.mg-panel-dark {
+  background: rgba(10, 12, 17, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.mg-card-dark h2,
+.mg-panel-dark h3 {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.mg-subtitle-dark,
+.mg-hint-dark {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.mg-label-dark {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.mg-input-dark,
+.mg-select-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.mg-input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mg-btn-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mg-btn-primary-dark {
+  background: linear-gradient(135deg, #a14cff 0%, #ff2e5f 100%);
+}
+
+.mg-pill-dark {
+  background: rgba(161, 76, 255, 0.18);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mg-list-dark li {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.90);
+}
+.mg-list-dark button {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.88);
+}
+.mg-list-dark button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.mg-details-dark summary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.mg-ol-dark {
+  color: rgba(255, 255, 255, 0.80);
+}
+
+/* Role toggles layout */
+.mg-role-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 860px) {
+  .mg-role-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.mg-role-col h4 {
+  margin: 6px 0 10px 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mg-checkbox-dark {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.mg-checkbox-dark input {
+  accent-color: #a14cff;
+}
+
+/* Card theme */
+.mg-swipe-card-dark {
+  background: radial-gradient(1000px 520px at 20% -10%, rgba(161, 76, 255, 0.25), transparent),
+    radial-gradient(900px 520px at 110% 10%, rgba(255, 46, 95, 0.16), transparent),
+    rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55);
+}
+
+.mg-chip-dark {
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mg-chip-soft-dark {
+  background: rgba(161, 76, 255, 0.18);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.mg-player-dark,
+.mg-secret-dark {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.mg-instructions-dark,
+.mg-role-desc-dark {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.mg-swipe-hint-dark {
+  background: rgba(161, 76, 255, 0.18);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.mg-tip-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.mg-table-wrap {
+  overflow-x: auto;
+}
+
+.mg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.mg-table th,
+.mg-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.mg-table th {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 800;
+}
+
+.mg-table td {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mg-alive {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mg-toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+}
+
+.mg-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  transition: left 0.18s ease, background 0.18s ease;
+}
+
+.mg-toggle[data-on="true"] {
+  background: rgba(0, 210, 140, 0.22);
+  border-color: rgba(0, 210, 140, 0.28);
+}
+
+.mg-toggle[data-on="true"]::after {
+  left: 22px;
+  background: rgba(0, 255, 170, 0.90);
+}
+
+.mg-dead {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+
+/* Swipe smoothness overrides (match Imposter feel) */
+.mg-swipe-card {
+  touch-action: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.mg-swipe-card.mg-animate {
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 320ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.mg-swipe-card.is-dragging {
+  transition: none !important;
+}
+
